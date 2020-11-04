@@ -7,13 +7,13 @@
 
 import UIKit
 
-class HeaderFooterReusableView: UICollectionReusableView {
+class HeaderFooterReusableView: UICollectionReusableView, NibReusable {
 
     @IBOutlet var headerLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        backgroundColor = .lightGray
     }
     
     func render(with header: String) {

@@ -27,7 +27,8 @@ open class DiffableCollectionViewDataSource<Section: SectionType, Item>: NSObjec
     private var sections: [CellSection] = []
     private weak var collectionView: UICollectionView?
     private var cellProvider: (UICollectionView, IndexPath, Item) -> UICollectionViewCell?
-    private var supplementaryViewProvider: DiffableCollectionViewDataSource<Section, Item>.SupplementaryViewProvider?
+   
+    public var supplementaryViewProvider: DiffableCollectionViewDataSource<Section, Item>.SupplementaryViewProvider?
     
     // MARK: init
     

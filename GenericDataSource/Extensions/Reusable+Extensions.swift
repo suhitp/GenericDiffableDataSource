@@ -63,7 +63,7 @@ public extension UICollectionView {
     
     
     //MARK: UICollectionReusableView
-    final func register<T: UICollectionReusableView>(supplementaryViewType: T.Type, ofKind elementKind: String)
+    final func register<T: UICollectionReusableView>(_ supplementaryViewType: T.Type, ofKind elementKind: String)
         where T: NibReusable {
             self.register(
                 supplementaryViewType.nib,
@@ -72,7 +72,7 @@ public extension UICollectionView {
             )
     }
     
-    final func register<T: UICollectionReusableView>(supplementaryViewType: T.Type, ofKind elementKind: String)
+    final func register<T: UICollectionReusableView>(_ supplementaryViewType: T.Type, ofKind elementKind: String)
         where T: Reusable {
             self.register(
                 supplementaryViewType.self,

@@ -45,50 +45,21 @@ class MultiSectionCollectionViewController: UICollectionViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    fileprivate func configureDataSource() {
-       
-        dataSource = DiffableCollectionViewDataSource<Section, AnyDifferentiable>(
-            collectionView: collectionView,
-            cellProvider: { (collectionView, indexPath, anyDifferentiable) -> UICollectionViewCell? in
-                let section: CellSection = self.dataInput[indexPath.section].model
-                switch section {
-                case .vertical:
-                    let cell = collectionView.dequeueReusableCell(for: indexPath) as VerticalCell
-                    if let carousel = anyDifferentiable.base as? Carousel {
-                        cell.render(with: carousel)
-                    }
-                    return cell
-                case .horizontal:
-                    let cell = collectionView.dequeueReusableCell(for: indexPath) as HorizontalCell
-                    if let playlist = anyDifferentiable.base as? Playlist {
-                        cell.render(with: playlist)
-                    }
-                    return cell
-                case .customText:
-                    let cell = collectionView.dequeueReusableCell(for: indexPath) as CustomTextCell
-                    if let ads = anyDifferentiable.base as? Ads {
-                        cell.render(with: ads)
-                    }
-                    return cell
-                }
-            }
-        )
-        
-        let reusableView = 
-    }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .systemBackground
-        navigationItem.title = "MultiSection Demo"
-        collectionView.delegate = self
-        
+        setupViews()
         setupBarButtons()
         registerCells()
         configureDataSource()
         setupData()
+    }
+    
+    private func setupViews() {
+        collectionView.backgroundColor = .systemBackground
+        navigationItem.title = "MultiSection Demo"
+        collectionView.delegate = self
     }
     
     private func registerCells() {
@@ -96,6 +67,7 @@ class MultiSectionCollectionViewController: UICollectionViewController {
         collectionView.register(VerticalCell.self)
         collectionView.register(HorizontalCell.self)
         collectionView.register(CustomTextCell.self)
+        collectionView.register(HeaderFooterReusableView.self, ofKind: UICollectionView.elementKindSectionHeader)
     }
     
     private func setupData() {
@@ -128,6 +100,47 @@ class MultiSectionCollectionViewController: UICollectionViewController {
         dataInput = input.enumerated().map { (offset: Int, model: CellSection) in
             let elements = model.elements().map { AnyDifferentiable($0) }
             return Section(model: model, elements: elements)
+        }
+    }
+    
+    // MARK: DiffableCollectionViewDataSource
+    
+    fileprivate func configureDataSource() {
+       
+        dataSource = DiffableCollectionViewDataSource<Section, AnyDifferentiable>(
+            collectionView: collectionView,
+            cellProvider: { (collectionView, indexPath, anyDifferentiable) -> UICollectionViewCell? in
+                let section: CellSection = self.dataInput[indexPath.section].model
+                switch section {
+                case .vertical:
+                    let cell = collectionView.dequeueReusableCell(for: indexPath) as VerticalCell
+                    if let carousel = anyDifferentiable.base as? Carousel {
+                        cell.render(with: carousel)
+                    }
+                    return cell
+                case .horizontal:
+                    let cell = collectionView.dequeueReusableCell(for: indexPath) as HorizontalCell
+                    if let playlist = anyDifferentiable.base as? Playlist {
+                        cell.render(with: playlist)
+                    }
+                    return cell
+                case .customText:
+                    let cell = collectionView.dequeueReusableCell(for: indexPath) as CustomTextCell
+                    if let ads = anyDifferentiable.base as? Ads {
+                        cell.render(with: ads)
+                    }
+                    return cell
+                }
+            }
+        )
+        
+        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
+            guard indexPath.section > 0 else {
+                return nil
+            }
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, for: indexPath) as HeaderFooterReusableView
+            headerView.render(with: "HeaderTitle: Section-\(indexPath.section)")
+            return headerView
         }
     }
     
@@ -191,4 +204,12 @@ extension MultiSectionCollectionViewController: UICollectionViewDelegateFlowLayo
             return CGSize(width: view.frame.width, height: 98)
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                          layout collectionViewLayout: UICollectionViewLayout,
+                          referenceSizeForHeaderInSection section: Int) -> CGSize {
+        guard section > 0 else { return .zero }
+        return CGSize(width: UIScreen.main.bounds.width, height: 50)
+    }
+
 }
