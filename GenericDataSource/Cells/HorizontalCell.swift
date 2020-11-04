@@ -16,13 +16,12 @@ class HorizontalCell: UICollectionViewCell, NibReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        let url = URL(string: "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-12-pro-max-4.jpg")!
-        Nuke.loadImage(with: url, into: imageView)
+        contentView.backgroundColor = .random
+        titleLabel.textColor = .white
     }
     
     func render(with playlist: Playlist) {
         titleLabel.text = playlist.title
-        titleLabel.textColor = .white
+        Nuke.loadImage(with: URL(string: playlist.imageUrl)!, into: imageView)
     }
 }

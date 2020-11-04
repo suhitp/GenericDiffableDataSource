@@ -67,54 +67,61 @@ class MultiSectionCollectionViewController: UICollectionViewController {
                     return cell
                 case .customText:
                     let cell = collectionView.dequeueReusableCell(for: indexPath) as CustomTextCell
+                    if let ads = anyDifferentiable.base as? Ads {
+                        cell.render(with: ads)
+                    }
                     return cell
                 }
             }
         )
         
+        let reusableView = 
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .black
+        collectionView.backgroundColor = .systemBackground
         navigationItem.title = "MultiSection Demo"
         collectionView.delegate = self
         
-        // Uncomment the following line to preserve selection between presentations
-        self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        collectionView.register(VerticalCell.self)
-        collectionView.register(HorizontalCell.self)
-        collectionView.register(CustomTextCell.self)
-        
         setupBarButtons()
+        registerCells()
         configureDataSource()
         setupData()
     }
     
-    func setupData() {
+    private func registerCells() {
+        // Register cell classes
+        collectionView.register(VerticalCell.self)
+        collectionView.register(HorizontalCell.self)
+        collectionView.register(CustomTextCell.self)
+    }
+    
+    private func setupData() {
         let input: [CellSection] = [
             CellSection.vertical(
                 [
-                    Carousel(id: "0", title: "Carousel-1", imageUrl: ""),
-                    Carousel(id: "1", title: "Carousel-2", imageUrl: ""),
-                    Carousel(id: "3", title: "Carousel-3", imageUrl: ""),
-                    Carousel(id: "4", title: "Carousel-4", imageUrl: "")
+                    Carousel(id: "0", title: "Carousel-1", imageUrl: verticalImages[0]),
+                    Carousel(id: "1", title: "Carousel-2", imageUrl: verticalImages[1]),
+                    Carousel(id: "3", title: "Carousel-3", imageUrl: verticalImages[2]),
+                    Carousel(id: "4", title: "Carousel-4", imageUrl: verticalImages[3])
                 ]
             ),
             CellSection.horizontal(
                 [
-                    Playlist(id: "0", title: "Playlist-1", imageUrl: ""),
-                    Playlist(id: "2", title: "Playlist-2", imageUrl: "")
+                    Playlist(id: "0", title: "Playlist-1", imageUrl: horizontalImages[0]),
+                    Playlist(id: "2", title: "Playlist-2", imageUrl: horizontalImages[1]),
+                    Playlist(id: "0", title: "Playlist-3", imageUrl: horizontalImages[2]),
+                    Playlist(id: "0", title: "Playlist-4", imageUrl: horizontalImages[3])
                 ]
             ),
             CellSection.customText(
                 [
-                    Ads(id: "101", title: "Ads-1", imageUrl: ""),
-                    Ads(id: "101", title: "Ads-1", imageUrl: ""),
-                    Ads(id: "101", title: "Ads-1", imageUrl: "")
+                    Ads(id: "101", title: "Ads-1", imageUrl: horizontalImages[0]),
+                    Ads(id: "101", title: "Ads-2", imageUrl: horizontalImages[1]),
+                    Ads(id: "101", title: "Ads-3", imageUrl: horizontalImages[2]),
+                    Ads(id: "101", title: "Ads-4", imageUrl: horizontalImages[3])
                 ]
             )
         ]
@@ -123,15 +130,14 @@ class MultiSectionCollectionViewController: UICollectionViewController {
             return Section(model: model, elements: elements)
         }
     }
-
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        dataInput[indexPath.section].elements.remove(at: indexPath.row)
-    }
+    
+    // MARK: Private methods
     
     fileprivate func setupBarButtons() {
-        let refreshBarButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(refreshAction))
-        let shuffleAllButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(shuffleAllSections))
-        navigationItem.rightBarButtonItems = [refreshBarButton, shuffleAllButton]
+        let refreshBarButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshAction))
+        let shuffleAllButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shuffleAllSections))
+        let sectionDeleteButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(animateSectionDeletion))
+        navigationItem.rightBarButtonItems = [refreshBarButton, shuffleAllButton, sectionDeleteButton]
     }
 
     @objc func refreshAction() {
@@ -141,15 +147,44 @@ class MultiSectionCollectionViewController: UICollectionViewController {
     @objc func shuffleAllSections() {
         dataInput.shuffle()
     }
+    
+    @objc func animateSectionDeletion() {
+        let input: [CellSection] = [
+            CellSection.vertical(
+                [
+                    Carousel(id: "0", title: "Carousel-1", imageUrl: verticalImages[0]),
+                    Carousel(id: "1", title: "Carousel-2", imageUrl: verticalImages[1]),
+                    Carousel(id: "3", title: "Carousel-3", imageUrl: verticalImages[2]),
+                    Carousel(id: "4", title: "Carousel-4", imageUrl: verticalImages[3])
+                ]
+            ),
+            CellSection.customText(
+                [
+                    Ads(id: "101", title: "Ads-1", imageUrl: horizontalImages[0]),
+                    Ads(id: "101", title: "Ads-2", imageUrl: horizontalImages[1]),
+                    Ads(id: "101", title: "Ads-3", imageUrl: horizontalImages[2]),
+                    Ads(id: "101", title: "Ads-4", imageUrl: horizontalImages[3])
+                ]
+            )
+        ]
+        dataInput = input.enumerated().map { (offset: Int, model: CellSection) in
+            let elements = model.elements().map { AnyDifferentiable($0) }
+            return Section(model: model, elements: elements)
+        }
+    }
 }
 
 extension MultiSectionCollectionViewController: UICollectionViewDelegateFlowLayout {
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        dataInput[indexPath.section].elements.remove(at: indexPath.row)
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let section: CellSection = dataInput[indexPath.section].model
         switch section {
         case .vertical:
-            return CGSize(width: (view.frame.width - 1) / 2, height: 220)
+            return CGSize(width: (view.frame.width - 1) / 2, height: 275)
         case .horizontal:
             return CGSize(width: view.frame.width, height: 190)
         default:

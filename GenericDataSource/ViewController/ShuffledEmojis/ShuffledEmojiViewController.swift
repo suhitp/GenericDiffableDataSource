@@ -86,10 +86,10 @@ class ShuffledEmojiViewController: UIViewController {
     }
 
     fileprivate func setupBarButtons() {
-        let refreshBarButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(refreshAction))
-        let shuffleAllButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(shuffleAllEmojis))
+        let refreshBarButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshAction))
+        let shuffleAllButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shuffleAllEmojis))
         let shuffleSectionButton = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(shuffleSections))
-        let refreshButton = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(refreshEmojis))
+        let refreshButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(refreshEmojis))
         navigationItem.rightBarButtonItems = [refreshBarButton, shuffleAllButton, shuffleSectionButton, refreshButton]
     }
 

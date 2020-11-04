@@ -16,23 +16,12 @@ class VerticalCell: UICollectionViewCell, NibReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        let url = URL(string: "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-12-pro-max-1.jpg")!
-        Nuke.loadImage(with: url, into: imageView)
     }
     
     func render(with carousel: Carousel) {
         title.text = carousel.title
         contentView.backgroundColor = .random
+        Nuke.loadImage(with: URL(string: carousel.imageUrl)!, into: imageView)
     }
 
-}
-
-extension UIColor {
-    static var random: UIColor {
-        return UIColor(red: .random(in: 0...1),
-                       green: .random(in: 0...1),
-                       blue: .random(in: 0...1),
-                       alpha: 1.0)
-    }
 }

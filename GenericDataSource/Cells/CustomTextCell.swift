@@ -17,12 +17,11 @@ class CustomTextCell: UICollectionViewCell, NibReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
-        let url = URL(string: "https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-12-pro-max-3.jpg")!
-        Nuke.loadImage(with: url, into: thumbnailImageView)
-        
         contentView.backgroundColor = .random
+    }
+    
+    func render(with ads: Ads) {
+        Nuke.loadImage(with: URL(string: ads.imageUrl)!, into: thumbnailImageView)
     }
 
 }
