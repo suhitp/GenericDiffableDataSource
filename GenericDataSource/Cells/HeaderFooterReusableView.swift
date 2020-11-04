@@ -13,7 +13,8 @@ class HeaderFooterReusableView: UICollectionReusableView, NibReusable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        backgroundColor = .lightGray
+        backgroundColor = .tertiarySystemBackground
+        headerLabel.textColor = .systemRed
     }
     
     func render(with header: String) {
