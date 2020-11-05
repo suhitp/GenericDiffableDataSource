@@ -67,7 +67,7 @@ class MultiSectionCollectionViewController: UICollectionViewController {
         collectionView.register(VerticalCell.self)
         collectionView.register(HorizontalCell.self)
         collectionView.register(CustomTextCell.self)
-        collectionView.register(HeaderFooterReusableView.self, ofKind: UICollectionView.elementKindSectionHeader)
+        collectionView.register(HeaderFooterReusableView.self, ofKind: .header)
     }
     
     private func setupData() {

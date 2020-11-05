@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		564CD08A25543C4E00D0A14F /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CD08925543C4E00D0A14F /* UICollectionView+Extensions.swift */; };
 		56923BE8254FCB61008EA7F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56923BE7254FCB61008EA7F0 /* AppDelegate.swift */; };
 		56923BEA254FCB61008EA7F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56923BE9254FCB61008EA7F0 /* SceneDelegate.swift */; };
 		56923BEC254FCB61008EA7F0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56923BEB254FCB61008EA7F0 /* ContentView.swift */; };
@@ -69,6 +70,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		564CD08925543C4E00D0A14F /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
 		56923BE4254FCB61008EA7F0 /* GenericDataSource.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericDataSource.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56923BE7254FCB61008EA7F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56923BE9254FCB61008EA7F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				56923C7825502474008EA7F0 /* Reusable+Extensions.swift */,
 				56A8F1B025529086004F0EE1 /* DifferenceKitExtensions.swift */,
 				56A8F1E82552BC6C004F0EE1 /* UIColorExtensions.swift */,
+				564CD08925543C4E00D0A14F /* UICollectionView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 			files = (
 				56A8F19D25528FA0004F0EE1 /* VerticalCell.swift in Sources */,
 				56923C64254FEAFB008EA7F0 /* Reusable.swift in Sources */,
+				564CD08A25543C4E00D0A14F /* UICollectionView+Extensions.swift in Sources */,
 				56A8F16425528791004F0EE1 /* Ads.swift in Sources */,
 				56923C4F254FDA0C008EA7F0 /* MultiSectionCollectionViewController.swift in Sources */,
 				56A8F1E42552B941004F0EE1 /* Images.swift in Sources */,

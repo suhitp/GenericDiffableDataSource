@@ -63,20 +63,20 @@ public extension UICollectionView {
     
     
     //MARK: UICollectionReusableView
-    final func register<T: UICollectionReusableView>(_ supplementaryViewType: T.Type, ofKind elementKind: String)
+    final func register<T: UICollectionReusableView>(_ supplementaryViewType: T.Type, ofKind elementKind: UICollectionView.SectionHeaderFooterElementKind)
         where T: NibReusable {
             self.register(
                 supplementaryViewType.nib,
-                forSupplementaryViewOfKind: elementKind,
+                forSupplementaryViewOfKind: elementKind.rawValue,
                 withReuseIdentifier: supplementaryViewType.reuseIdentifier
             )
     }
     
-    final func register<T: UICollectionReusableView>(_ supplementaryViewType: T.Type, ofKind elementKind: String)
+    final func register<T: UICollectionReusableView>(_ supplementaryViewType: T.Type, ofKind elementKind: UICollectionView.SectionHeaderFooterElementKind)
         where T: Reusable {
             self.register(
                 supplementaryViewType.self,
-                forSupplementaryViewOfKind: elementKind,
+                forSupplementaryViewOfKind: elementKind.rawValue,
                 withReuseIdentifier: supplementaryViewType.reuseIdentifier
             )
     }

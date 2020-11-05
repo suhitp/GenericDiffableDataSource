@@ -20,21 +20,23 @@ open class DiffableTableViewDataSource<Section: SectionType, Item>: NSObject, UI
     public typealias CellProvider = (UITableView, IndexPath, Item) -> UITableViewCell?
     
     /// SupplimentoryViewProvider
-    public typealias SupplementaryViewProvider = (UITableView, String, IndexPath) -> UIView?
+    public typealias SectionHeaderFooterTitleProvider = (UITableView, UITableView.SectionHeaderFooterElementKind, Int) -> String?
     
     // MARK: Properties
     
     private var sections: [CellSection] = []
     private weak var tableView: UITableView?
     private var cellProvider: DiffableTableViewDataSource<Section, Item>.CellProvider
-    var supplementaryViewProvider: DiffableTableViewDataSource<Section, Item>.SupplementaryViewProvider?
+    public var sectionHeaderFooterTitleProvider: DiffableTableViewDataSource<Section, Item>.SectionHeaderFooterTitleProvider?
     
     // MARK: init
     
-    init(
+    public init(
+        sections: [CellSection] = [],
         tableView: UITableView,
         cellProvider: @escaping DiffableTableViewDataSource<Section, Item>.CellProvider
     ) {
+        self.sections = sections
         self.tableView = tableView
         self.cellProvider = cellProvider
         super.init()
@@ -57,9 +59,39 @@ open class DiffableTableViewDataSource<Section: SectionType, Item>: NSObject, UI
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = cellProvider(tableView, indexPath, itemAtIndexPath(indexPath)) else {
-            fatalError("Inavlid cell configured")
+            fatalError("Inavlid cell configured for section: \(indexPath.section) at indexPath: \(indexPath.row)")
         }
         return cell
+    }
+    
+    open func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionHeaderFooterTitleProvider?(tableView, .header, section)
+    }
+
+    open func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return sectionHeaderFooterTitleProvider?(tableView, .footer, section)
+    }
+
+    open func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    open func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    }
+
+    open func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    open func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    }
+
+    open func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return nil
+    }
+
+    open func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        return index
     }
 
     // MARK: Private function
@@ -79,5 +111,3 @@ open class DiffableTableViewDataSource<Section: SectionType, Item>: NSObject, UI
         }
     }
 }
-
-
