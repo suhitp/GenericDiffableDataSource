@@ -7,15 +7,21 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    var body: some View {
-        Text("Hello, world!")
-            .padding()
-    }
-}
+let deviceNames: [String] = [
+    "iPhone SE",
+    "iPhone 11 Pro Max",
+    "iPad Pro (11-inch)"
+]
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+@available(iOS 13.0, *)
+struct ViewController_Preview: PreviewProvider {
+  static var previews: some View {
+    ForEach(deviceNames, id: \.self) { deviceName in
+      UIViewControllerPreview {
+        MultiSectionCollectionViewController()
+      }
+      .previewDevice(PreviewDevice(rawValue: deviceName))
+      .previewDisplayName(deviceName)
     }
+  }
 }

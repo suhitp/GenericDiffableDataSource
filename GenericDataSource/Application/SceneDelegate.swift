@@ -24,3 +24,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 }
 
+
+struct SceneDelegate_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            UIViewControllerPreview {
+                UINavigationController(rootViewController: MenuTableViewController())
+            }
+            UIViewControllerPreview {
+                MultiSectionCollectionViewController()
+            }
+        }
+    }
+}

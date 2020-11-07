@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		564CD08A25543C4E00D0A14F /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CD08925543C4E00D0A14F /* UICollectionView+Extensions.swift */; };
+		564CD0E92556B26A00D0A14F /* UIViewControllerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CD0E82556B26900D0A14F /* UIViewControllerPreview.swift */; };
 		56923BE8254FCB61008EA7F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56923BE7254FCB61008EA7F0 /* AppDelegate.swift */; };
 		56923BEA254FCB61008EA7F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56923BE9254FCB61008EA7F0 /* SceneDelegate.swift */; };
 		56923BEC254FCB61008EA7F0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56923BEB254FCB61008EA7F0 /* ContentView.swift */; };
@@ -71,6 +72,7 @@
 
 /* Begin PBXFileReference section */
 		564CD08925543C4E00D0A14F /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
+		564CD0E82556B26900D0A14F /* UIViewControllerPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerPreview.swift; sourceTree = "<group>"; };
 		56923BE4254FCB61008EA7F0 /* GenericDataSource.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericDataSource.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56923BE7254FCB61008EA7F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56923BE9254FCB61008EA7F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				56923BEB254FCB61008EA7F0 /* ContentView.swift */,
 				56923BE7254FCB61008EA7F0 /* AppDelegate.swift */,
 				56923BE9254FCB61008EA7F0 /* SceneDelegate.swift */,
+				564CD0E82556B26900D0A14F /* UIViewControllerPreview.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 				56923BE8254FCB61008EA7F0 /* AppDelegate.swift in Sources */,
 				56923C47254FD975008EA7F0 /* UIViewExtensions.swift in Sources */,
 				56A8F1E92552BC6C004F0EE1 /* UIColorExtensions.swift in Sources */,
+				564CD0E92556B26A00D0A14F /* UIViewControllerPreview.swift in Sources */,
 				56923BEA254FCB61008EA7F0 /* SceneDelegate.swift in Sources */,
 				56923BEC254FCB61008EA7F0 /* ContentView.swift in Sources */,
 				56A8F19B25528FA0004F0EE1 /* HorizontalCell.swift in Sources */,
