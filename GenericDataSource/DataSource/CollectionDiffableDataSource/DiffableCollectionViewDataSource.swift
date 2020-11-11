@@ -85,5 +85,15 @@ open class DiffableCollectionViewDataSource<Section: SectionType, Item>: NSObjec
             completion?(data)
         }
     }
+    
+    public func itemIdentifier(for indexPath: IndexPath) -> Item? {
+        guard indexPath.section <= sections.count, indexPath.section >= 0 else {
+            return nil
+        }
+        let section = sections[indexPath.section]
+        guard indexPath.item >= 0, indexPath.item < section.elements.count else {
+            return nil
+        }
+        return section.elements[indexPath.row]
+    }
 }
-

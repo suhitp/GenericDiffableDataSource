@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		564CD08A25543C4E00D0A14F /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CD08925543C4E00D0A14F /* UICollectionView+Extensions.swift */; };
 		564CD0E92556B26A00D0A14F /* UIViewControllerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CD0E82556B26900D0A14F /* UIViewControllerPreview.swift */; };
+		564CD1F9255AC64400D0A14F /* HorizontalScrollingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564CD1F7255AC64400D0A14F /* HorizontalScrollingCell.swift */; };
+		564CD1FA255AC64400D0A14F /* HorizontalScrollingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 564CD1F8255AC64400D0A14F /* HorizontalScrollingCell.xib */; };
 		56923BE8254FCB61008EA7F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56923BE7254FCB61008EA7F0 /* AppDelegate.swift */; };
 		56923BEA254FCB61008EA7F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56923BE9254FCB61008EA7F0 /* SceneDelegate.swift */; };
 		56923BEC254FCB61008EA7F0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56923BEB254FCB61008EA7F0 /* ContentView.swift */; };
@@ -73,6 +75,8 @@
 /* Begin PBXFileReference section */
 		564CD08925543C4E00D0A14F /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
 		564CD0E82556B26900D0A14F /* UIViewControllerPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerPreview.swift; sourceTree = "<group>"; };
+		564CD1F7255AC64400D0A14F /* HorizontalScrollingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollingCell.swift; sourceTree = "<group>"; };
+		564CD1F8255AC64400D0A14F /* HorizontalScrollingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalScrollingCell.xib; sourceTree = "<group>"; };
 		56923BE4254FCB61008EA7F0 /* GenericDataSource.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenericDataSource.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56923BE7254FCB61008EA7F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56923BE9254FCB61008EA7F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -171,13 +175,13 @@
 		56923BE6254FCB61008EA7F0 /* GenericDataSource */ = {
 			isa = PBXGroup;
 			children = (
-				56A8F1E22552B931004F0EE1 /* Constants */,
 				56923C6B25500C26008EA7F0 /* Application */,
 				56923C7D25502641008EA7F0 /* DataModels */,
 				56923C53254FE0BE008EA7F0 /* Cells */,
 				56923C45254FD967008EA7F0 /* Extensions */,
 				56923C1F254FCF74008EA7F0 /* DataSource */,
 				56923C62254FEAB3008EA7F0 /* ViewController */,
+				56A8F1E22552B931004F0EE1 /* Constants */,
 				56923C6F25500C43008EA7F0 /* Resources */,
 				56923BF5254FCB69008EA7F0 /* Info.plist */,
 				56923BEF254FCB69008EA7F0 /* Preview Content */,
@@ -249,6 +253,8 @@
 				56A8F19625528FA0004F0EE1 /* VerticalCell.xib */,
 				56A8F1ED2552C43A004F0EE1 /* HeaderFooterReusableView.swift */,
 				56A8F1EE2552C43A004F0EE1 /* HeaderFooterReusableView.xib */,
+				564CD1F7255AC64400D0A14F /* HorizontalScrollingCell.swift */,
+				564CD1F8255AC64400D0A14F /* HorizontalScrollingCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -476,6 +482,7 @@
 				56923BF4254FCB69008EA7F0 /* LaunchScreen.storyboard in Resources */,
 				56923BF1254FCB69008EA7F0 /* Preview Assets.xcassets in Resources */,
 				56A8F19E25528FA0004F0EE1 /* CustomTextCell.xib in Resources */,
+				564CD1FA255AC64400D0A14F /* HorizontalScrollingCell.xib in Resources */,
 				56923BEE254FCB69008EA7F0 /* Assets.xcassets in Resources */,
 				56A8F1BE25529269004F0EE1 /* EmojiCell.xib in Resources */,
 				56A8F19C25528FA0004F0EE1 /* VerticalCell.xib in Resources */,
@@ -521,6 +528,7 @@
 				56923C7F25502653008EA7F0 /* Carousel.swift in Sources */,
 				56A8F1B125529086004F0EE1 /* DifferenceKitExtensions.swift in Sources */,
 				56A8F1AC25529033004F0EE1 /* ShuffledEmojiViewController.swift in Sources */,
+				564CD1F9255AC64400D0A14F /* HorizontalScrollingCell.swift in Sources */,
 				56923BE8254FCB61008EA7F0 /* AppDelegate.swift in Sources */,
 				56923C47254FD975008EA7F0 /* UIViewExtensions.swift in Sources */,
 				56A8F1E92552BC6C004F0EE1 /* UIColorExtensions.swift in Sources */,

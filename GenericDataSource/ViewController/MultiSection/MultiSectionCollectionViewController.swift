@@ -67,33 +67,42 @@ class MultiSectionCollectionViewController: UICollectionViewController {
         collectionView.register(VerticalCell.self)
         collectionView.register(HorizontalCell.self)
         collectionView.register(CustomTextCell.self)
+        collectionView.register(HorizontalScrollingCell.self)
         collectionView.register(HeaderFooterReusableView.self, ofKind: .header)
     }
     
     private func setupData() {
         let input: [CellSection] = [
+            CellSection.horizontalScrollingCell(
+                [
+                    Playlist(id: "0", title: "Playlist-1", imageUrl: horizontalImages[3]),
+                    Playlist(id: "2", title: "Playlist-2", imageUrl: horizontalImages[1]),
+                    Playlist(id: "3", title: "Playlist-3", imageUrl: horizontalImages[2]),
+                    Playlist(id: "1", title: "Playlist-4", imageUrl: horizontalImages[0])
+                ]
+            ),
             CellSection.vertical(
                 [
                     Carousel(id: "0", title: "Carousel-1", imageUrl: verticalImages[0]),
                     Carousel(id: "1", title: "Carousel-2", imageUrl: verticalImages[1]),
-                    Carousel(id: "3", title: "Carousel-3", imageUrl: verticalImages[2]),
-                    Carousel(id: "4", title: "Carousel-4", imageUrl: verticalImages[3])
+                    Carousel(id: "2", title: "Carousel-3", imageUrl: verticalImages[2]),
+                    Carousel(id: "3", title: "Carousel-4", imageUrl: verticalImages[3])
                 ]
             ),
             CellSection.horizontal(
                 [
                     Playlist(id: "0", title: "Playlist-1", imageUrl: horizontalImages[0]),
-                    Playlist(id: "2", title: "Playlist-2", imageUrl: horizontalImages[1]),
-                    Playlist(id: "0", title: "Playlist-3", imageUrl: horizontalImages[2]),
-                    Playlist(id: "0", title: "Playlist-4", imageUrl: horizontalImages[3])
+                    Playlist(id: "1", title: "Playlist-2", imageUrl: horizontalImages[1]),
+                    Playlist(id: "2", title: "Playlist-3", imageUrl: horizontalImages[2]),
+                    Playlist(id: "3", title: "Playlist-4", imageUrl: horizontalImages[3])
                 ]
             ),
             CellSection.customText(
                 [
                     Ads(id: "101", title: "Ads-1", imageUrl: horizontalImages[0]),
-                    Ads(id: "101", title: "Ads-2", imageUrl: horizontalImages[1]),
-                    Ads(id: "101", title: "Ads-3", imageUrl: horizontalImages[2]),
-                    Ads(id: "101", title: "Ads-4", imageUrl: horizontalImages[3])
+                    Ads(id: "102", title: "Ads-2", imageUrl: horizontalImages[1]),
+                    Ads(id: "103", title: "Ads-3", imageUrl: horizontalImages[2]),
+                    Ads(id: "104", title: "Ads-4", imageUrl: horizontalImages[3])
                 ]
             )
         ]
@@ -101,6 +110,7 @@ class MultiSectionCollectionViewController: UICollectionViewController {
             let elements = model.elements().map { AnyDifferentiable($0) }
             return Section(model: model, elements: elements)
         }
+        print(dataInput)
     }
     
     // MARK: DiffableCollectionViewDataSource
@@ -130,16 +140,23 @@ class MultiSectionCollectionViewController: UICollectionViewController {
                         cell.render(with: ads)
                     }
                     return cell
+                case .horizontalScrollingCell:
+                    let cell = collectionView.dequeueReusableCell(for: indexPath) as HorizontalScrollingCell
+                    if let playlist = anyDifferentiable.base as? [Playlist] {
+                        cell.render(with: playlist)
+                    }
+                    return cell
                 }
             }
         )
         
-        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
-            guard indexPath.section > 0 else {
+        dataSource.supplementaryViewProvider = { [weak self] (collectionView, kind, indexPath) in
+            guard let dataInput = self?.dataInput else {
                 return nil
             }
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, for: indexPath) as HeaderFooterReusableView
-            headerView.render(with: "HeaderTitle: Section-\(indexPath.section)")
+            let headerTitle: String = dataInput[indexPath.section].model.headerViewTitle
+            headerView.render(with: headerTitle)
             return headerView
         }
     }
@@ -200,7 +217,9 @@ extension MultiSectionCollectionViewController: UICollectionViewDelegateFlowLayo
             return CGSize(width: (view.frame.width - 1) / 2, height: 275)
         case .horizontal:
             return CGSize(width: view.frame.width, height: 190)
-        default:
+        case .horizontalScrollingCell:
+            return CGSize(width: view.frame.width, height: 190)
+        case .customText:
             return CGSize(width: view.frame.width, height: 98)
         }
     }
@@ -208,7 +227,6 @@ extension MultiSectionCollectionViewController: UICollectionViewDelegateFlowLayo
     func collectionView(_ collectionView: UICollectionView,
                           layout collectionViewLayout: UICollectionViewLayout,
                           referenceSizeForHeaderInSection section: Int) -> CGSize {
-        guard section > 0 else { return .zero }
         return CGSize(width: UIScreen.main.bounds.width, height: 50)
     }
 

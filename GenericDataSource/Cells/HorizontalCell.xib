@@ -44,7 +44,7 @@
                 <outlet property="imageView" destination="WOi-75-Ige" id="PEl-ye-0aw"/>
                 <outlet property="titleLabel" destination="dGE-Wi-io1" id="sfC-F4-r4o"/>
             </connections>
-            <point key="canvasLocation" x="248.55072463768118" y="69.977678571428569"/>
+            <point key="canvasLocation" x="-62" y="70"/>
         </collectionViewCell>
     </objects>
     <resources>

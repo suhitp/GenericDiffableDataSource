@@ -13,6 +13,7 @@ enum CellSection: Differentiable, Equatable, Hashable {
     case vertical([Carousel])
     case horizontal([Playlist])
     case customText([Ads])
+    case horizontalScrollingCell([Playlist])
     
     func elements() -> [AnyHashable] {
         switch self {
@@ -22,6 +23,8 @@ enum CellSection: Differentiable, Equatable, Hashable {
             return playlists
         case .vertical(let ads):
             return ads
+        case .horizontalScrollingCell(let playlists):
+            return [playlists]
         }
     }
     
@@ -31,6 +34,19 @@ enum CellSection: Differentiable, Equatable, Hashable {
     
     var differenceIdentifier: String {
         return UUID().uuidString
+    }
+    
+    var headerViewTitle: String {
+        switch self {
+        case .customText:
+            return "Custom Thumbnail n Text Header"
+        case .horizontal:
+            return "Horizontal Image Header"
+        case .vertical:
+            return "Vertical Image Header"
+        case .horizontalScrollingCell:
+            return "Horizontal Scrolling Cell Header"
+        }
     }
 }
 
